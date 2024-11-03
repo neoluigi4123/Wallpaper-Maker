@@ -1,11 +1,7 @@
-# use python 1.10
 from PIL import Image, ImageFilter, ImageDraw
 import os
 from pathlib import Path
 import math
-
-import_folder = r'C:\Users\neoma\Pictures\wallpaper maker'
-export_folder = r'C:\Users\neoma\Pictures\wallpaper\result'
 
 def create_blurred_background(img, target_width, target_height):
     """Create a blurred background that fills the target dimensions"""
@@ -34,9 +30,7 @@ def create_blurred_background(img, target_width, target_height):
     return bg
 
 def create_rounded_corners_mask(size, radius):
-    #Create an alpha mask for rounded corners
-    
-    # Create a blank mask with alpha channel
+    # Create an alpha mask for rounded corners
     mask = Image.new('L', size, 0)
     draw = ImageDraw.Draw(mask)
     
@@ -131,7 +125,11 @@ def process_image(input_path, output_path):
     result.save(output_path, 'PNG')
 
 def main():
-    # Create export folder if it doesn't exist
+    # Ask user for the import folder
+    import_folder = input("Enter the path to the folder containing the images: ")
+    
+    # Define export folder as a "result" subfolder within the import folder
+    export_folder = os.path.join(import_folder, "result")
     Path(export_folder).mkdir(parents=True, exist_ok=True)
     
     # Process all images in import folder
